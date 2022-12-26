@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        clifford: '#da373d',
+                    }
+                }
+            }
+        }
+    </script>
+    <style type="text/tailwindcss">
+        @layer utilities {
+      .content-auto {
+        content-visibility: auto;
+      }
+    }
+  </style>
+    <title>Document</title>
+    <link rel="stylesheet" href="Style/draw2.css">
+    <link rel="stylesheet" href="Style/draw1.css">
+</head>
+<body>
+    <div class="w-[100%]">
+        <h1 class="text-[55px] font-bold px-14">
+            Image Classified Interface
+        </h1>
+        <div class="flex">
+            <div class="w-[80%]">
+                <div class=" mt-9 ml-10 mr-10 image-workspace">
+                    <div
+                        class="h-[650px] upload boom flex items-center justify-center rounded-lg border-dashed w-full border-2">
+                        <p class="text-3xl font-semibold">Upload Your Photo</p>
+                    </div>
+                    <div>
+                        <img class="h-auto w-[70%]" alt='' src="" id="screenshot" draggable="false" />
+                        <svg width="853" height="750" viewBox="0 0 853 750" id="draw"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <rect id="marquee" x="450" y="420" width="150" height="150" />
+                            <g id="boxes"></g>
+                        </svg>
+                        <svg width="853" height="750" viewBox="0 0 853 750" id="dra"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <rect id="marq" x="450" y="420" width="150" height="150" />
+                            <g id="box"></g>
+                        </svg>
+                        
+                    </div>
+                </div>
+            </div>
+            <div class="w-[20%]">
+                <div class="mt-6 ">
+                    <button class="bg-gray-600 text-white px-4 rounded-md font-semibold hover:bg-gray-700 py-3 mr-2">
+                        Reset
+                    </button>
+                    <div class="inline-block upload-box">
+                        <button class="bg-gray-600  text-white px-4 rounded-md font-semibold hover:bg-gray-700 py-3 mr-2">
+                            Upload
+                            <input type="file" hidden class="hidden-upload" accept="image/*" />
+                        </button>
+                    </div>
+                    <button class="bg-gray-600 text-white px-4 rounded-md font-semibold hover:bg-gray-700 py-3">
+                        Save
+                    </button>
+                </div>
+                <div class="mt-5 mr-3">
+                    <input type="text" class="bg-slate-100 h-12 border rounded-lg w-full px-2"
+                        placeholder="Image Classified Text" />
+                </div>
+                <div class="border-b-2">
+                    <div class="mt-5 flex justify-around">
+                        <button id="label1"
+                            class="bg-amber-600 text-white px-6 rounded-md font-semibold hover:bg-amber-700 py-3 mr-3">
+                            Label 1
+                        </button>
+                        <button id="label2"
+                            class="bg-rose-600 text-white px-6 rounded-md font-semibold hover:bg-rose-700 py-3 mr-3">
+                            Label 2
+                        </button>
+                    </div>
+                    <div class="mt-5 flex justify-around">
+                        <button onClick={croppedLabel3}
+                            class="bg-pink-600 text-white px-6 rounded-md font-semibold hover:bg-pink-700 py-3 mr-3">
+                            Label 3
+                        </button>
+                        <button onClick={croppedLabel4}
+                            class="bg-blue-600 text-white px-6 rounded-md font-semibold hover:bg-blue-700 py-3 mr-3">
+                            Label 4
+                        </button>
+                    </div>
+                    <div class="mt-5 mb-4 flex justify-around">
+                        <button onClick={croppedLabel5}
+                            class="bg-green-600 text-white px-6 rounded-md font-semibold hover:bg-green-700 py-3 mr-3">
+                            Label 5
+                        </button>
+                        <button onClick={croppedLabel6}
+                            class="bg-sky-600 text-white px-6 rounded-md font-semibold hover:bg-sky-700 py-3 mr-3">
+                            Label 6
+                        </button>
+                    </div>
+                </div>
+                <div class="my-4 font-medium">
+                    <div id="image-description">
+
+                    </div>
+                </div>
+                <div>
+                    <p class="text-amber-600 font-medium">
+                        <!-- L1:{" "} -->
+                        <span>
+                            <!-- {croppedSize1.x}X, {croppedSize1.y}Y, {croppedSize1.width}X
+                            {croppedSize1.height} -->
+                        </span>
+                    </p>
+                    <!-- )} -->
+
+                    <!-- {croppedSize2 && ( -->
+                    <p class="text-red-600 font-medium">
+                        <!-- L2:{" "} -->
+                        <span>
+                            <!-- {croppedSize2.x}X, {croppedSize2.y}Y, {croppedSize2.width}X
+                            {croppedSize2.height} -->
+                        </span>
+                    </p>
+                    <!-- )}
+                    {croppedSize3 && ( -->
+                    <p class="text-rose-600 font-medium">
+                        <!-- L3:{" "} -->
+                        <span>
+                            <!-- {croppedSize3.x}X, {croppedSize3.y}Y, {croppedSize3.width}X
+                            {croppedSize3.height} -->
+                        </span>
+                    </p>
+                    <!-- )} -->
+                    <!-- {croppedSize4 && ( -->
+                    <p class="text-blue-600 font-medium">
+                        <!-- L4:{" "} -->
+                        <span>
+                            <!-- {croppedSize4.x}X, {croppedSize4.y}Y, {croppedSize4.width}X -->
+                            <!-- {croppedSize4.height} -->
+                        </span>
+                    </p>
+                    <!-- )} -->
+                    <!-- {croppedSize5 && ( -->
+                    <p class="text-green-600 font-medium">
+                        <!-- L5:{" "} -->
+                        <span>
+                            <!-- {croppedSize5.x}X, {croppedSize5.y}Y, {croppedSize5.width}X -->
+                            <!-- {croppedSize5.height} -->
+                        </span>
+                    </p>
+                    <!-- )} -->
+                    <!-- {croppedSize6 && ( -->
+                    <p class="text-sky-600 font-medium">
+                        <!-- L6:{" "} -->
+                        <span>
+                            <!-- {croppedSize6.x}X, {croppedSize6.y}Y, {croppedSize6.width}X -->
+                            <!-- {croppedSize6.height} -->
+                        </span>
+                    </p>
+                    <!-- )} -->
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+    <script>
+        // var actionButton = document.querySelectorAll('.action-button button')
+        var uploadBox = document.querySelector('.upload-box')
+        var fileInput = uploadBox.querySelector('input');
+        var image_workspace = document.querySelector('.image-workspace img')
+        var boom = document.querySelector('.image-workspace .boom')
+        var image_description = document.getElementById('image-description')
+
+        fileInput.onchange = () => {
+            var file = fileInput.files[0]
+            var url = window.URL.createObjectURL(new Blob([file], { type: 'image/jpeg' }))
+
+            image_workspace.src = url
+            boom.style.display = 'none'
+            image_description.innerHTML = `
+            <div>
+                <p>Image Name: ${file.name}</p>
+                <p>Image Size: ${file.size / 1000} KB</p>
+            </div>
+            `;
+
+        }
+
+        uploadBox.addEventListener('click', () => fileInput.click())
+
+    </script>
+    <script src="JS/draw2.js"></script>
+    <script src="JS/draw1.js"></script>
+
+
+</body>
+</html>
